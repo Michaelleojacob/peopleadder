@@ -35,6 +35,12 @@ const domManager = (function () {
 	return { domElement };
 })();
 
+//cache container
+const cacheContainer = (() => {
+	const container = document.querySelector('#container');
+	return { container };
+})();
+
 //dom input and button
 const addPersonUI = (function () {
 	const handleSubmit = e => {
@@ -74,7 +80,7 @@ const createPersonWrapper = (() => {
 //each person.
 const createNewPersonLi = name => {
 	const deletePerson = e => {
-		e.target.parentNode.remove();
+		e.target.closest('div').remove();
 	};
 	const person = domManager.domElement({
 		classes: ['personWrapper'],
@@ -94,7 +100,6 @@ const createNewPersonLi = name => {
 };
 
 const appendToContainer = (() => {
-	const container = document.querySelector('#container');
 	container.appendChild(addPersonUI.domTree);
 	container.appendChild(createPersonWrapper.liParentTree);
 })();
