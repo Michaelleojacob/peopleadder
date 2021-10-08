@@ -35,10 +35,14 @@ const domManager = (function () {
 	return { domElement };
 })();
 
+//dom input and button
 const addPersonUI = (function () {
 	const handleSubmit = e => {
 		e.preventDefault();
-		console.log(e);
+		const personName = domTree.childNodes[0].value;
+		if (personName === '') return;
+		createNewPersonLi(personName);
+		domTree.childNodes[0].value = '';
 	};
 	const domTree = domManager.domElement({
 		type: 'form',
@@ -58,6 +62,7 @@ const addPersonUI = (function () {
 	return { domTree };
 })();
 
+//dom placeholder
 const createPersonWrapper = (() => {
 	const liParentTree = domManager.domElement({
 		type: 'ul',
@@ -66,7 +71,11 @@ const createPersonWrapper = (() => {
 	return { liParentTree };
 })();
 
+//each person.
 const createNewPersonLi = name => {
+	const deletePerson = e => {
+		e.target.parentNode.remove();
+	};
 	const person = domManager.domElement({
 		classes: ['personWrapper'],
 		children: [
@@ -76,6 +85,7 @@ const createNewPersonLi = name => {
 			domManager.domElement({
 				type: 'button',
 				text: 'X',
+				events: [{ type: 'click', handler: deletePerson }],
 			}),
 		],
 	});
@@ -88,3 +98,8 @@ const appendToContainer = (() => {
 	container.appendChild(addPersonUI.domTree);
 	container.appendChild(createPersonWrapper.liParentTree);
 })();
+
+//dummy data
+createNewPersonLi('mikey');
+createNewPersonLi('sam');
+createNewPersonLi('fred');

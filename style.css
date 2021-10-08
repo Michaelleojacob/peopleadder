@@ -17,3 +17,10 @@ html {
 	align-items: center;
 	flex-direction: column;
 }
+
+.personWrapper {
+	display: flex;
+	width: min(10rem);
+	justify-content: space-between;
+	border: 1px solid black;
+}
