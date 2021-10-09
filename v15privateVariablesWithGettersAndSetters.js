@@ -1,4 +1,6 @@
 const test1 = (() => {
+	//if using localStorage/backend =>
+	//let num = 0 || data;
 	let num = 0;
 	function incrementNum() {
 		// return num++; //* does NOT work for some reason
@@ -11,6 +13,7 @@ const test1 = (() => {
 	return { incrementNum, getNum };
 })();
 
+//? num will be private only the methods can mutate it. ?\\
 console.log(test1);
 console.log(test1.num);
 test1.num = 14; //* this is setting a property on test1.
