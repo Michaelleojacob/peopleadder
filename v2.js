@@ -1,3 +1,6 @@
+//global spaghetti.
+//testing a few small things.
+
 const domManager = ({
 	type = 'div',
 	text = null,
