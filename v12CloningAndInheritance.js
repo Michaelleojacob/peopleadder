@@ -23,8 +23,12 @@ var test1 = (function (old) {
 		}
 	}
 
+	//* private since it's scoped to the function.
 	var super_moduleMethod = old.moduleMethod;
 	// console.log(super_moduleMethod);
+
+	my.publicSuperMethod = super_moduleMethod;
+
 	my.moduleMethod = function () {
 		//* override method on the clone, access to super through super_moduleMethod
 		return console.log('replaced lelelelelel');
@@ -34,4 +38,6 @@ var test1 = (function (old) {
 })(objToClone);
 
 objToClone.moduleMethod();
+// test1.super_moduleMethod(); //* this will throw and error
+test1.publicSuperMethod(); //* this is the old method. publicSuperMethod == objToClone.moduleMethod;
 test1.moduleMethod();
