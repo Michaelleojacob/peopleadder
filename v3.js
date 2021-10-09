@@ -32,11 +32,39 @@ const domManager = ({
 		}
 		if (events !== null) {
 			events.map(({ type, handler }) => {
-				console.log(type);
-				console.log(handler);
 				el.addEventListener(type, handler);
 			});
 		}
 		return el;
 	},
 });
+
+const wrapper = (() => {
+	const lol = () => {
+		console.log('clicked');
+	};
+	const mything = domManager({
+		type: 'button',
+		text: 'click me',
+		classes: ['class1'],
+		events: [{ type: 'click', handler: lol }],
+	});
+	const container = document.querySelector('#container');
+	container.appendChild(mything.createDomElement());
+})();
+
+const outsideiife = () => {
+	console.log('outside iife clicked');
+};
+
+//!  outside wrapper / iife !\\
+
+const myoutside = domManager({
+	type: 'button',
+	text: `don't click me`,
+	classes: ['class1'],
+	events: [{ type: 'click', handler: outsideiife }],
+});
+
+const container = document.querySelector('#container');
+container.appendChild(myoutside.createDomElement());
